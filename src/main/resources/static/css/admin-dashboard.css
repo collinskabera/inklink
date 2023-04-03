@@ -1,0 +1,57 @@
+body{
+	background-color: #d8d8d8;
+}
+
+.ik-admin-div{
+	background-color: white;
+	display: none;
+	padding-top: 10px;
+	padding-bottom: 30px;
+	padding-left: 15px;
+	padding-right: 15px;
+}
+
+.ik-navbar-div{
+	box-shadow: 0px 4px 2px #bbb;
+}
+
+.ik-title-header{
+	color: #066ebd;
+	font-weight: bold;
+	text-decoration: underline;
+	padding-left: 7px;
+}
+
+.ik-title-mini-header{
+	text-decoration: underline;
+	font-weight: bold;
+	color: #330033;
+	text-shadow: 1px 1px #eee;
+}
+
+.ik-button-div, .ik-div-edit-btn{
+	text-align: center;
+	padding-top: 10px;
+}
+
+.ik-fieldset{
+	padding-top: 7px;
+	padding-bottom: 7px;
+}
+
+.ik-main-button{
+	min-width: 150px;
+}
+
+.ik-separator{
+	height: 6px;
+	color: #00000000;
+	background-color: #00000000;
+	margin: 0px;
+	border: 0px solid black;
+	padding: 0px;
+}
+
+.ik-book-cover{
+	border: 1px black solid;
+}

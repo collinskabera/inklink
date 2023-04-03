@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>InkLink Cart</title>
+		
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/inklink.css">
+
+	<script src="/js/jquery.js" type="text/javascript"></script>
+	<script src="/js/main.js" type="text/javascript"></script>
+	<script src="/js/validation.js" type="text/javascript"></script>
+	<script src="/js/all.js" type="text/javascript"></script>
+	<script src="/js/cart.js" type="text/javascript"></script>
+	
+	<style>
+		body{
+			background-color: #ddd;
+		}
+	</style>
+</head>
+<body>
+	
+	<nav class="navbar navbar-expand-lg bg-light" aria-label="InkLink Navbar" id="main-nav">
+		<div class="container-fluid">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#inkLinkNavBar" aria-controls="inkLinkNavBar" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse d-lg-flex" id="inkLinkNavBar">
+				
+				<a href="home" class="navbar-brand col-lg-3 me-0 active">InkLink</a>
+				
+				<ul class="navbar-nav col-lg-6 justify-content-lg-center">
+					<li class="nav-item">
+						<a href="viewAllBooks" class="nav-link">Books</a>
+					</li>
+					<li class="nav-item">
+						<a href="viewAllAuthors" class="nav-link">Authors</a>
+					</li>
+					<li class="nav-item">
+						<a href="viewAllCategories" class="nav-link">Categories</a>
+					</li>
+				</ul>
+				<div class="d-lg-flex col-lg-3 justify-content-lg-end">
+
+					<ul class="navbar-nav">
+						<li class="nav-item">
+							<a href="#" class="nav-link">
+								<img src="/images/cart1_1.png" height="30" width="30" id="nvCart" style="display: none;" onclick="location.href='/cart'">
+							</a>
+						</li>
+						<li class="nav-item">
+							<a href="#" class="nav-link" id="nvUsername" style="display: none;">User name</a>
+						</li>
+						
+						<li class="nav-item">
+							<button type="button" class="btn btn-primary" id="nvBtnLogIn" onclick="login()" style="display: none;">Log In</button>
+						</li>
+						
+						<li class="nav-item">
+							<button type="button" class="btn btn-primary" id="nvBtnLogOut" onclick="logout()" style="display: none;">Log Out</button>
+						</li>
+					</ul>	
+					
+				</div>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-lg-10 offset-lg-1" style="background-color: white;">
+				<div class="row">
+					<h1>Viewing Cart</h1>
+				</div>
+				
+				<div class="row">
+					<div>
+						<h3>The items in your cart</h3>
+					</div>
+				</div>
+				
+				<div class="row">
+					<table class="table table-striped table-borderless">
+						<thead>
+							<th>#</th>
+							<th>Name</th>
+							<th>ISBN</th>
+							<th>Price</th>
+							<th></th>
+						</thead>
+						
+						<tbody id="ctTable">
+							
+						</tbody>
+						
+						<tfoot>
+							<tr>
+								<td colspan="3"><strong>TOTAL</strong></td>
+								<td id="ctTotal"></td>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				
+				<div class="row" style="text-align: center; padding-bottom: 10px;">
+					<div class="col-lg-4 offset-lg-4">
+						<button type="button" class="btn btn-lg btn-primary w-100" data-bs-toggle="modal" data-bs-target="#purchaseModal" onclick="checkout()" id="puCheckoutBtn">Checkout</button>
+					</div>
+				</div>
+			</div>
+		</div>	
+		
+	</div>
+	
+	<div class="modal fade" id="confirmRemoveBook" tabindex="-1" aria-labelledby="confirmRemoveBookLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="confirmRemoveBookLabel">Remove book from cart.</h1>
+					<button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<p>Are you sure you want to remove <strong><span id="ctModalBookName"></span></strong> from the cart?</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="ctModalBtnCancel">Cancel</button>
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="ctModalBtnRemove">Remove</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="purchaseModal" tabindex="-1" aria-labelledby="purchaseModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="purchaseModalLabel">Purchase</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="puModalCloseBtn"></button>
+				</div>
+				
+				<div class="modal-body" id="puStep1Div">
+					<h3 id="puStep1Header"></h3>
+					<p>Information about your purchase.</p>
+					<table class="table table-bordered">
+						<tr>
+							<th>Number of items</th>
+							<td id="puNumberOfItems"></td>
+						</tr>
+						<tr>
+							<th>Total price</th>
+							<td id="puTotalPrice"></td>
+						</tr>
+					</table>
+					<div style="text-align: center;">
+						<button type="button" class="btn btn-primary" id="puStep1Btn">Continue</button>
+					</div>
+					
+				</div>
+				
+				<div class="modal-body" id="puStep2Div">
+					<h3 id="puStep2Header"></h3>
+					<h4>M-Pesa Payment</h4>
+					<p>Enter the phone number through which you will be paying for your purchase.</p>
+					<form>
+						<label class="form-label">Phone Number </label>
+						<input type="text" id="puPhoneNumber" class="form-control">
+					</form>
+					<div style="text-align: center; margin-top: 7px; margin-bottom: 7px;">
+						<button type="button" class="btn btn-primary" onclick="doPayment()">Continue</button>
+					</div>
+					
+				</div>
+				
+				<div class="modal-body" id="puStep3Div">
+					<h3 id="puStep3Header"></h3>
+					<p class="bg-success" id="puTransactionMessage">Your purchase was successful.</p>
+					<label><strong>Transaction ID: </strong><span id="puPurchaseID"></span></label>
+					<label id="puTransactionId"></label>
+					<br>
+					<label>Your Download Link</label>
+					<a href="#" target="_blank" id="puDownloadLink"></a>
+					<p>Follow the link above to download your e-books. They have been compressed, so extract them using an application like WinRar or WinZip etc.</p>
+					
+					<div style="text-align: center;">
+						<button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="puFinishBtn">Finish</button>
+					</div>
+				</div>
+			</div>
+			
+		</div>		
+	</div>
+	
+	<div class="toast-container position-fixed bottom-0 end-0" id="toastContainer" style="z-index: 10; margin: 10px;"></div>
+	
+	<footer class="py-3 border-top">
+		<p class="text-center text-muted">InkLink &copy; 2023</p>
+	</footer>
+	
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

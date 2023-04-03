@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>	
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Login</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+	<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script type="text/javascript" src="/js/adminLogin.js"></script>
+	<script type="text/javascript" src="/js/validation.js"></script>
+	
+	<style type="text/css">
+		body{
+			background-image: url("/images/20710.jpg");
+			background-size: cover;
+		}
+		#formDiv{
+			background-color: white;
+			border-radius: 10px;
+			padding-top: 18px;
+			padding-bottom: 18px;
+			padding-left: 30px;
+			padding-right: 30px;
+			min-width: 450px;
+			display: inline-block;
+		}
+		#form{
+			width: 100%;
+			overflow: auto;
+		}
+		.outer-div{
+			height: 100%;
+			background: #00000000;
+			text-align: center;
+			padding-top: 90px;
+		}
+	</style>
+	
+</head>
+<body>
+	<div class="container-fluid outer-div">
+		<div id="formDiv">
+			<form autocomplete="off" id="form">
+				<h2 style="text-align: center; color: indigo;"><strong>InkLink Book Shop</strong></h2>
+				<h5 style="text-align: center;">Admin Login</h5>
+				<br>
+				<input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+				<br>
+				<input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+				<br>
+				<button type="button" class="btn btn-primary" onclick="adminLogin()" style="float: right;" id="loginBtn">Log In</button>
+			</form>
+		</div>
+	</div>
+	
+	<div class="toast-container position-fixed bottom-0 end-0" id="toastContainer" style="z-index: 10; margin: 10px;">
+		
+	</div>
+	
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Admin Dashboard</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/admin-dashboard.css">
+
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script type="text/javascript" src="/js/adminDashboard.js"></script>
+	<script type="text/javascript" src="/js/validation.js"></script>
+	
+</head>
+<body>
+	<div class="ik-navbar-div">
+		<nav class="navbar navbar-expand-md navbar-dark bg-dark" aria-label="Admin Dashboard Navbar">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="#">InkLink Dashboard</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboardNav" aria-controls="dashboardNav" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+	
+				<div class="collapse navbar-collapse" id="dashboardNav">
+					<ul class="navbar-nav me-auto mb-2 mb-md-0">
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Admins</a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item disabled">Add Admin</a></li>
+								<li><a href="#" class="dropdown-item disabled">View All</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Books</a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item" onclick="doAddBook()">Add A Book</a></li>
+								<li><a href="#" class="dropdown-item disabled">Search</a></li>
+								<li><a href="#" class="dropdown-item" onclick="viewAllBooks()">View All</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Users</a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item disabled">Add</a></li>
+								<li><a href="#" class="dropdown-item disabled">View</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Purchases</a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item disabled">View All</a></li>
+								<li><a href="#" class="dropdown-item disabled">Current Month</a></li>
+								<li><a href="#" class="dropdown-item disabled">Search</a></li>
+							</ul>
+						</li>
+						<li class="nav-item dropdown">
+							<a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="nvUsername"></a>
+							<ul class="dropdown-menu">
+								<li><a href="#" class="dropdown-item disabled">View Account</a></li>
+								<li><a href="#" class="dropdown-item disabled">Change Password</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+	
+				<form class="d-flex">
+					<button class="btn btn-success" type="button" onclick="logout()">Log Out</button>
+				</form>
+			</div>
+		</nav>
+	</div>
+
+	<div id="main" class="container-fluid">
+
+		<!--3. Adding a book-->
+		<div id="addBook" class="offset-1 ik-admin-div col-md-10">
+			<h3 class="ik-title-header">Add a Book</h3>
+			<form class="row" autocomplete="off">
+				<div class="col-md-6">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">General Information</legend>
+						<label class="form-label">Name</label>
+						<input type="text" name="name" id="abName" class="form-control" required>
+						<label class="form-label">Book Cover</label>
+						
+						<input type="file" name="cover" id="abCover" class="form-control">
+						<input hidden type="text" name="coverName" id="abCoverFileName" class="form-control">
+						
+						<label class="form-label">Description</label>
+						<textarea name="description" id="abDescription" required rows="6" class="form-control"></textarea>
+						<label class="form-label">Price</label>
+						<input type="number" name="price" id="abPrice" class="form-control" required>
+						<label class="form-label">Book File</label>
+						<input type="file" class="form-control" id="abBookFile" required>
+					</fieldset>
+				</div>
+				<div class="col-md-6">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Publication Details</legend>
+						<label class="form-label">Publisher Name</label>
+						<input type="text" name="publisher" id="abPublisher" required class="form-control">
+						<label class="form-label">Publication Year</label>
+						<input type="number" name="year" id="abYear" class="form-control">
+						<label class="form-label">Edition No.</label>
+						<input type="number" name="edition" id="abEdition" required class="form-control">
+						<label class="form-label">Publication Country</label>
+						<input type="text" name="country" id="abCountry" class="form-control">
+						<label class="form-label">ISBN</label>
+						<input type="text" name="isbn" id="abIsbn" required placeholder="9768-344-3432" class="form-control">
+					</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Authors</legend>
+						<input type="text" name="author1" id="abAuthor1" required class="form-control" placeholder="Author 1">
+						<hr class="ik-separator">
+						<input type="text" name="author2" id="abAuthor2" class="form-control" placeholder="Author 2">
+						<hr class="ik-separator">
+						<input type="text" name="author3" id="abAuthor3" class="form-control" placeholder="Author 3">
+						<hr class="ik-separator">
+						<input type="text" name="author4" id="abAuthor4" class="form-control" placeholder="Author 4">
+						<hr class="ik-separator">
+						<input type="text" name="author5" id="abAuthor5" class="form-control" placeholder="Author 5">
+					</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Categories</legend>
+						<input type="text" name="category1" id="abCategory1" required class="form-control" placeholder="Category 1">
+						<hr class="ik-separator">
+						<input type="text" name="category2" id="abCategory2" class="form-control" placeholder="Category 2">
+						<hr class="ik-separator">
+						<input type="text" name="category3" id="abCategory3" class="form-control" placeholder="Category 3">
+						<hr class="ik-separator">
+						<input type="text" name="category4" id="abCategory4" class="form-control" placeholder="Category 4">
+						<hr class="ik-separator">
+						<input type="text" name="category5" id="abCategory5" class="form-control" placeholder="Category 5">
+					</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Physical Details</legend>
+						<label class="form-label">Book Width</label>
+						<input type="number" name="width" id="abWidth" required class="form-control">
+						<label class="form-label">Book Height</label>
+						<input type="number" name="height" id="abHeight" required class="form-control">
+						<label class="form-label">Number of Pages</label>
+						<input type="number" name="numberOfPages" id="abNumberOfPages" placeholder="100" required class="form-control">
+						<label class="form-label">Language</label>
+						<select id="abLanguage" name="language" required class="form-control">
+							<option value="English">English</option>
+							<option value="Kiswahili">Kiswahili</option>
+						</select>
+					</fieldset>
+				</div>
+				
+				<div class="ik-button-div">
+					<button class="btn btn-primary btn-lg ik-main-button" type="button" onclick="addBook()" id="addBookBtn">Add</button>
+					<button class="btn btn-success btn-lg ik-main-button" type="button" onclick="doAddBook()" id="addAnotherBookBtn">Add Another Book</button>
+				</div>
+			</form>
+		</div>
+
+		<!--4. Viewing/Editing a book-->
+		<div id="viewBook" class="offset-1 ik-admin-div col-md-10">
+			<h3 id="vbTitle"class="ik-title-header">View a Book</h3>
+			<form class="row" autocomplete="off">
+				<div class="col-md-3">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Cover</legend>
+						<img class="ik-book-cover" width="150px" height="180px" id="vbCurrentCover" title="Current Book Cover" alt="Current cover for this book">
+					</fieldset>
+				</div>
+				<div class="col-md-6">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">General Information</legend>
+						<label class="form-label">Book ID</label>
+						<input type="number" name="id" id="vbId" class="form-control" disabled>
+						<label class="form-label">Name</label>
+						<input type="text" name="name" id="vbName" class="form-control" disabled>	
+						<label class="form-label">Description</label>
+						<textarea class="form-control" id="vbDescription" name="description" rows="6" disabled></textarea>
+						<label class="form-label">Price</label>
+						<input type="number" name="price" id="vbPrice" class="form-control" disabled>
+					</fieldset>
+				</div>
+				<div class="col-md-3">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Publication Details</legend>
+						<label class="form-label">Publisher Name</label>
+						<input type="text" name="publisher" class="form-control" id="vbPublisher" disabled>
+						<label class="form-label">Publication Year</label>
+						<input type="number" name="year" class="form-control" id="vbYear" disabled>
+						<label class="form-label">Publication Country</label>
+						<input type="text" name="country" class="form-control" id="vbCountry" disabled>
+						<label class="form-label">Edition No.</label>
+						<input type="number" name="edition" class="form-control" id="vbEdition" disabled>
+						<label class="form-label">ISBN</label>
+						<input type="text" name="isbn" id="vbIsbn" class="form-control" disabled>
+					</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Authors</legend>
+						<input type="text" name="author1" id="vbAuthor1" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="author2" id="vbAuthor2" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="author3" id="vbAuthor3" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="author4" id="vbAuthor4" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="author5" id="vbAuthor5" class="form-control" disabled>
+					</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Categories</legend>
+						<input type="text" name="category1" id="vbCategory1" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="category2" id="vbCategory2" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="category3" id="vbCategory3" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="category4" id="vbCategory4" class="form-control" disabled>
+						<hr class="ik-separator">
+						<input type="text" name="category5" id="vbCategory5" class="form-control" disabled>
+					</fieldset>
+				</div>
+				<div class="col-md-4">
+					<fieldset class="ik-fieldset">
+						<legend class="ik-title-mini-header">Physical Details</legend>
+						<label class="form-label">Book Width</label>
+						<input type="number" name="width" id="vbWidth" class="form-control" disabled>
+						<label class="form-label">Book Height</label>
+						<input type="number" name="height" id="vbHeight" class="form-control" disabled>
+						<label class="form-label">Number of Pages</label>
+						<input type="number" name="numberOfPages" id="vbNumberOfPages" disabled class="form-control">
+						<label class="form-label">Language</label>
+						<select class="form-control" name="language" id="vbLanguage" disabled>
+							<option value="English">English</option>
+							<option value="Kiswahili">Kiswahili</option>
+						</select>
+					</fieldset>
+				</div>
+				<div class="row">
+					<div id="vbDivBtnEdit" class="ik-div-edit-btn">
+						<button type="button" class="btn btn-primary ik-main-button" id="vbBtnEdit" onclick="activateEditBook()">Edit</button>
+					</div>
+					<div id="vbDivBtnCancel" class="ik-div-edit-btn">
+						<button type="button" class="btn btn-secondary ik-main-button" id="vbBtnCancel" onclick="cancelEditBook()">Cancel</button>
+					</div>
+					<div id="vbDivBtnSave" class="ik-div-edit-btn">
+						<button type="button" class="btn btn-info ik-main-button" id="vbBtnSave" onclick="saveEditBook()">Save</button>
+					</div>
+					<div id="vbDivBtnDelete" class="ik-div-edit-btn">
+						<button type="button" class="btn btn-danger ik-main-button" id="vbBtnDelete" onclick="confirmDeleteBook()" data-bs-toggle="modal" data-bs-target="#confirmDeleteBook">Delete</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!--5. View all books.-->
+		<div id="viewAllBooks" class="offset-1 ik-admin-div col-md-10">
+			
+			<h3 class="ik-title-header">View All Books</h3>
+
+			<legend class="ik-title-mini-header">All the books in the system</legend>
+
+			<table class="table table-striped">
+				<thead>
+					<th>#</th>
+					<th>ID</th>
+					<th>Name</th>
+					<th>ISBN</th>
+					<th>Price</th>
+					<th></th>
+				</thead>
+				<tbody id="vabTableBody">
+					
+				</tbody>
+			</table>
+		</div>
+	</div>
+	
+	<div class="modal fade" id="confirmDeleteBook" tabindex="-1" aria-labelledby="confirmDeleteBookLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="confirmDeleteBookLabel">Delete book from the system.</h1>
+					<button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+
+				<div class="modal-body">
+					<p>Are you sure you want to delete <strong><span id="vbModalBookName"></span></strong> from the system? This action cannot be undone.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="vbModalBtnCancel">Cancel</button>
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="vbModalBtnDelete" onclick="deleteBook()">Delete</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="toast-container position-fixed bottom-0 end-0" id="toastContainer" style="z-index: 10; margin: 10px;"></div>
+	
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

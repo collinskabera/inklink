@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
+	
+	<title>InkLink Log In</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+	<style type="text/css">
+		body{
+			background-image: url("/images/18126.jpg");
+			background-size: cover;
+		}
+		#formDiv{
+			background-color: white;
+			border-radius: 10px;
+			padding-top: 18px;
+			padding-bottom: 18px;
+			padding-left: 30px;
+			padding-right: 30px;
+			min-width: 530px;
+			display: inline-block;
+		}
+		.outer-div{
+			height: 100%;
+			background: #00000000;
+			text-align: center;
+			padding-top: 90px;
+		}
+	</style>
+	
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script type="text/javascript" src="/js/validation.js"></script>
+	<script type="text/javascript" src="/js/userLogin.js"></script>
+	
+</head>
+<body>
+	<div class="container-fluid outer-div">
+		<div id="formDiv">
+			<form id="form" autocomplete="off">
+				<h2 style="text-align: center; color: #0333a6;"><strong>InkLink Book Shop</strong></h2>
+				<h5 style="text-align: center;">User Account Login</h5>
+				<br>
+				<input type="text" name="username" id="username" class="form-control" placeholder="Username" required>
+				<br>
+				<input type="password" name="password" id="password" class="form-control" placeholder="Password" required>
+				<br>
+				<div class="row">
+					<div style="text-align: left;">
+						<label>Don't have an account? </label>
+						<button type="button" class="btn btn-secondary" onclick="location.href='signUp'">Sign Up</button>
+						<button type="button" class="btn btn-primary" onclick="userLogin()" style="float: right;" id="loginBtn">Log In</button>	
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	
+	<div class="toast-container position-fixed bottom-0 end-0" id="toastContainer" style="z-index: 10; margin: 10px;">
+		
+	</div>
+	
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

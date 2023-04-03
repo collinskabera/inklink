@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<meta name="_csrf" content="${_csrf.token}">
+	<meta name="_csrf_header" content="${_csrf.headerName}">
+	
+	<title>InkLink Sign Up</title>
+
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+
+	<style type="text/css">
+		body{
+			background-image: url("/images/16437.jpg");
+			background-size: cover;
+			background-repeat: repeat-y;
+			padding-left: 10px;
+		}
+		#form{
+			background-color: white;
+			margin-top: 30px;
+			border-radius: 10px;
+			padding: 15px;
+			opacity: 0.95;
+		}
+		h3{
+			color: #063e9d;
+			font-weight: bold;
+			padding-left: 7px;
+		}
+		p{
+			font-size: 1.2em;
+		}
+	</style>
+	
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<script type="text/javascript" src="/js/main.js"></script>
+	<script type="text/javascript" src="/js/validation.js"></script>
+	<script type="text/javascript" src="/js/signUp.js"></script>
+	
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<form class="col-md-5" id="form" autocomplete="off">
+				<h3>InkLink - Sign Up</h3>
+				<p>Create an account with us to experience our vast collection of books</p>
+				<label class="form-label" for="suUsername">Username</label>
+				<input name="username" id="suUsername" type="text" required class="form-control">
+				<div class="row">
+					<div class="col-md-6">
+						<label class="form-label" for="suFirstName">First Name</label>
+						<input name="firstName" id="suFirstName" type="text" class="form-control">
+					</div>
+					<div class="col-md-6">
+						<label class="form-label" for="suLastName">Last Name</label>
+						<input name="lastName" id="suLastName" type="text" class="form-control">
+					</div>
+				</div>
+				<label class="form-label" for="suEmail">Email Address</label>
+				<input name="email" id="suEmail" type="email" class="form-control">
+				
+				<fieldset class="mb-3">
+					<legend>Gender</legend>
+					<div class="form-check">
+						<input type="radio" name="gender" class="form-check-input" id="suGenderMale">
+						<label class="form-check-label" for="suGenderMale">Male</label>
+					</div>
+					<div class="form-check">
+						<input type="radio" name="gender" class="form-check-input" id="suGenderFemale">
+						<label class="form-check-label" for="suGenderFemale">Female</label>
+					</div>
+				</fieldset>
+				
+				<label class="form-label" for="suPassword">Password</label>
+				<input name="password" id="suPassword" type="password" required class="form-control">
+				
+				<label class="form-label" for="suConfirm">Confirm Password</label>
+				<input name="confirmPassword" id="suConfirm" type="password" required class="form-control">
+				
+				<div style="overflow: auto; width: 100%; margin-top: 15px;">
+					<button type="button" class="btn btn-primary"onclick="doSignUp()" style="float: right;">Sign Up</button>
+				</div>
+				
+			</form>
+		</div>
+	</div>
+	
+	<div class="toast-container position-fixed bottom-0 end-0" id="toastContainer" style="z-index: 10; margin: 10px;">
+		
+	</div>
+	
+	<script type="text/javascript" src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
